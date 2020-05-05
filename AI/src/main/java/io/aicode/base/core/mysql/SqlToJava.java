@@ -37,7 +37,7 @@ public class SqlToJava {
         matchList = StringTools.getByPattern(sql, "(COMMENT|comment)\\s*=\\s*'\\W*'");
         System.out.println(matchList);
         //获取字段声明sql片段
-        matchList = StringTools.getByPattern(sql, "\\s{2,}[`\\w_]*\\s+\\w+[\\(\\d+\\)]*['\\d*\\-:\\s\\a-zA-Z_\\u4e00-\\u9fa5]*,");
+        matchList = StringTools.getByPattern(sql, "\\s{2,}[`\\w_]*\\s+\\w+[\\(\\d+\\)]*['\\d*\\-:\\s\\a-zA-Z_，,\\u4e00-\\u9fa5]*,");
         System.out.println(matchList);
 
 
