@@ -63,6 +63,14 @@ public class FreemarkerHelper implements TemplateHelper {
         } catch (TemplateException e) {
             e.printStackTrace();
             return e.getMessage();
+        }finally {
+            if(out!=null){
+                try {
+                    out.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return "success";
     }

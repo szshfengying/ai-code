@@ -33,6 +33,7 @@ public class BeetlHelper implements TemplateHelper {
      */
     @Override
     public String generate(TemplateData templateData, String targetFilePath, String templatePath) {
+        Writer out = null;
         try {
             templatePath = templatePath.replace("//", "/").replace("\\", "/");
             targetFilePath = targetFilePath.replace("\\", "/").replace("//", "/");
@@ -46,14 +47,23 @@ public class BeetlHelper implements TemplateHelper {
             FileResourceLoader resourceLoader = new FileResourceLoader("/", "UTF-8");
             groupTemplate.setResourceLoader(resourceLoader);
             Template template = groupTemplate.getTemplate(templatePath);
+
             Map<String, Object> dataMap = JSON.parseObject(JSON.toJSONString(templateData), Map.class);
             dataMap.put("package", templateData.getBasePackage());
             template.binding(dataMap);
-            Writer out = new OutputStreamWriter(new FileOutputStream(targetFilePath), Charset.forName("UTF-8"));
+            out = new OutputStreamWriter(new FileOutputStream(targetFilePath), Charset.forName("UTF-8"));
             template.renderTo(out);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             return e.getMessage();
+        } finally {
+            if (out != null) {
+                try {
+                    out.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return "success";
     }

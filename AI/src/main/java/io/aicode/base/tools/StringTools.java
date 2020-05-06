@@ -319,7 +319,7 @@ public class StringTools {
      */
     public static Map<String, Object> getStateOrType(String text) {
         //正则表达式 匹配 【汉字 英文】 或 【英文 汉字】或【英文 数字】 或 【数字 英文】的格式
-        String reg = "[\\u4e00-\\u9fa5]+\\s?\\w+|\\w+\\s?[\\u4e00-\\u9fa5]+|[a-zA-Z]+\\s?\\-?\\d+|\\-?\\d+\\s?[a-zA-Z]+";
+        String reg = "[\\u4e00-\\u9fa5]+\\s+\\w+|\\w+\\s+[\\u4e00-\\u9fa5]+|[a-z_A-Z]+\\s+\\-?\\d+|\\-?\\d+\\s+[a-z_A-Z]+";
         //中文
         String regCn = "[\\u4e00-\\u9fa5]+";
         //英文
@@ -589,7 +589,7 @@ public class StringTools {
         System.out.println(s);
         List<String> matchList = StringTools.getByPattern("启用 Enable", "[\\u4e00-\\u9fa5]+");
         System.out.println(matchList);
-        List<String> matchList1 = StringTools.getByPattern("启用 Enable", "[a-zA-Z]+");
+        List<String> matchList1 = StringTools.getByPattern("启用 Enable", "[a-z_A-Z]+");
         System.out.println(matchList1);
 
     }
